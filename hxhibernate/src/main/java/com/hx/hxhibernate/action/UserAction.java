@@ -10,24 +10,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hx.hxhibernate.entity.UserEntity;
 import com.hx.hxhibernate.repository.UserRepository;
+import com.hx.hxhibernate.service.UserService;
 
 @Controller
 @Component
-public class DemoAction {
+public class UserAction {
 
 	@Autowired
-	public UserRepository urep;
+	public UserService uServices;
 
 	@RequestMapping("/demo")
 	@ResponseBody
 	public String orm() {
-		// urep.save(new UserEntity("xs", "xsn", "xsc"));
-		List<UserEntity> list = urep.findAll();
+		List<UserEntity> list = uServices.listDatas();
 		StringBuffer sbf = new StringBuffer();
-		sbf.append("总行数：" + urep.count() + " ");
+		sbf.append("总行数：" + uServices.getTotalCount() + " ");
 		for (UserEntity entity : list) {
 			sbf.append(entity.getId() + " ");
 			sbf.append(entity.getCaption() + " ");
+			sbf.append(entity.getPassword() + " ");
 			sbf.append(entity.getCreateTime() + " ");
 			sbf.append(entity.getUpdateTime() + "\n");
 		}

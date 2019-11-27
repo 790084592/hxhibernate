@@ -10,9 +10,7 @@ import com.hx.hxhibernate.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
-	public UserEntity save(UserEntity user);
-
-	@Query(value = "SELECT u FROM UserEntity u WHERE id=:id")
-	public UserEntity findById(@Param("id") String id);
+	public UserEntity findById(String id);
+	
 
 }

@@ -12,40 +12,41 @@ import com.hx.hxhibernate.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
-	UserRepository drep;
+	UserRepository urep;
 
 	@Override
 	public void save(UserEntity user) {
-		drep.save(user);
+		urep.save(user);
 	}
 
 	@Override
 	public UserEntity findById(String id) {
-		return drep.findById(id);
+		return urep.findById(id);
 	}
 
 	@Override
 	public ArrayList<UserEntity> listDatas() {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList<UserEntity>) urep.findAll();
 	}
 
 	@Override
 	public int getTotalCount() {
-		return (int) drep.count();
+		return (int) urep.count();
 	}
 
 	@Override
-	public void modify(UserEntity user) {
+	public void update(UserEntity user) {
 		UserEntity oldUser = findById(user.getId());
-		if(oldUser == null) {
-			drep.save(oldUser);
+		if (oldUser != null) {
+			oldUser.setCaption(user.getCaption());
+			oldUser.setPassword(user.getPassword());
+			urep.save(oldUser);
 		}
 	}
 
 	@Override
 	public void deleteById(String id) {
-		drep.delete(findById(id));
+		urep.delete(findById(id));
 	}
 
 }

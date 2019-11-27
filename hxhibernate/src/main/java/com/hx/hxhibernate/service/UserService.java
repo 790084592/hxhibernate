@@ -14,7 +14,7 @@ public interface UserService {
 
 	public void save(UserEntity user);
 	
-	public void modify(UserEntity user);
+	public void update(UserEntity user);
 	
 	public void deleteById(String id);
 	

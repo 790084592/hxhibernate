@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * 所有实体的基类
@@ -32,6 +34,7 @@ public class BaseEntity implements Serializable {
 
 	@Column(name = "UPDATETIME_")
 	@org.hibernate.annotations.UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)  //不加此注解，会导致更新时间的与创建时间的格式不一致
 	private Date updateTime;
 
 	/**
