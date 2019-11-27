@@ -8,22 +8,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hx.hxhibernate.entity.DemoEntity;
-import com.hx.hxhibernate.repository.DemoRepository;
+import com.hx.hxhibernate.entity.UserEntity;
+import com.hx.hxhibernate.repository.UserRepository;
 
 @Controller
 @Component
 public class DemoAction {
-	
-	@Autowired 
-	public DemoRepository drep;
+
+	@Autowired
+	public UserRepository urep;
 
 	@RequestMapping("/demo")
 	@ResponseBody
 	public String orm() {
-		long i = 3;
-		List<DemoEntity> list = drep.findAll();
-		return drep.findById("3").getCaption();
+		// urep.save(new UserEntity("xs", "xsn", "xsc"));
+		List<UserEntity> list = urep.findAll();
+		StringBuffer sbf = new StringBuffer();
+		sbf.append("总行数：" + urep.count() + " ");
+		for (UserEntity entity : list) {
+			sbf.append(entity.getId() + " ");
+			sbf.append(entity.getCaption() + " ");
+			sbf.append(entity.getCreateTime() + " ");
+			sbf.append(entity.getUpdateTime() + "\n");
+		}
+		return sbf.toString();
 	}
 
 }
